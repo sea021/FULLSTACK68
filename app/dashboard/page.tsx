@@ -55,7 +55,8 @@ export default function Dashboard() {
         if (!confirm("ต้องการลบสินค้านี้หรือไม่?")) return;
         try {
             await axios.delete("/api/product", { data: { id } });
-            setProducts((prev) => prev.filter((p) => p.id !== id));
+            const res = await axios.get("/api/product");
+            setProducts(res.data.data);
         } catch (error) {
             console.error("Error deleting product", error);
         }
