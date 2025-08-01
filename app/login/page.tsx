@@ -26,14 +26,12 @@ const LoginPage: React.FC = () => {
                 console.log(res.data);
                 if (res.data.message) {
                     setMessage(res.data.message);
-                    setTimeout(() => {
-                        setMessage("");
-                    }, 2000)
+                    setTimeout(() => setMessage(""), 2000);
                 } else {
                     setLogin(true);
-                    router.push("/dashboard");
-
+                    window.location.href = "/dashboard";
                 }
+
             }
         } catch (error) {
             console.log(error)
