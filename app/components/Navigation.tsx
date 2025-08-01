@@ -8,9 +8,10 @@ import axios from "axios";
 export default function Navigation() {
   interface User {
     username: string;
+    role: string;
   }
 
-  const [user, setUser] = useState<User | null>(null); // ✅ ปลอดภัย
+  const [user, setUser] = useState<User | null>(null);
 
   const [showDropdown, setShowDropdown] = useState(false);
   const router = useRouter();
@@ -52,8 +53,8 @@ export default function Navigation() {
           <Link href="#" className="text-gray-600 hover:text-blue-500">Contact</Link>
           {!user ? (
             <>
-              <Link href="/login" className="text-gray-600 hover:text-blue-500">Login</Link>
-              <Link href="/register" className="text-gray-600 hover:text-blue-500">Register</Link>
+              <Link href="/login" className="text-white hover:text-gray-100 hover:bg-blue-600 bg-blue-500 p-2.5 rounded-lg">Login</Link>
+              <Link href="/register" className="text-gray-600 hover:text-blue-500 border border-2 p-2 rounded-lg">Register</Link>
             </>
           ) : (
             <>
@@ -62,6 +63,14 @@ export default function Navigation() {
 
                 {showDropdown && (
                   <div className="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg z-10">
+                    {user.role === "admin" && (
+                      <Link
+                        href="/dashboard"
+                        className="block text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+                      >
+                        Dashboard
+                      </Link>
+                    )}
                     <button
                       onClick={logout}
                       className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"

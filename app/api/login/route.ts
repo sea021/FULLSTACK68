@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
 
         const user = await prisma.user.findFirst({
             where: {
-                email: body.email
+                email: body.email.toLowerCase()
             },
         })
 
@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
             userId: user.id,
             email: user.email,
             username: user.username,
-            role: "customer",
+            role: user.role
         }
 
         const token = sign(token_obj, process.env.JWT_KEY!, {

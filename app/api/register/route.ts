@@ -41,9 +41,10 @@ export async function POST(req: NextRequest) {
 
     await prisma.user.create({
       data: {
-        email: body.email,
+        email: body.email.toLowerCase(),
         password: hashPassword,
         username: body.username,
+        role: "user"
       },
     });
 

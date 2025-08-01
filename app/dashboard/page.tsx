@@ -25,9 +25,10 @@ export default function Dashboard() {
                 const res = await axios.get("/api/me");
                 if (!res.data.user) {
                     router.push("/login")
+                } else if (res.data.user.role !== "admin") {
+                    router.push("/")
                 } else {
                     setUser(res.data.user);
-
                 }
             } catch (error) {
                 console.error(error);
@@ -128,11 +129,11 @@ export default function Dashboard() {
 
                     <thead>
                         <tr className="bg-gray-200">
+                            <th className="border border-gray-300 p-2">รูปภาพ</th>
                             <th className="border border-gray-300 p-2">ชื่อ</th>
                             <th className="border border-gray-300 p-2">ราคา</th>
                             <th className="border border-gray-300 p-2">คำอธิบาย</th>
                             <th className="border border-gray-300 p-2">ประเภท</th>
-                            <th className="border border-gray-300 p-2">รูปภาพ</th>
                             <th className="border border-gray-300 p-2">จัดการ</th>
                         </tr>
                     </thead>
@@ -146,10 +147,6 @@ export default function Dashboard() {
                         ) : (
                             products.map((product) => (
                                 <tr key={product.id}>
-                                    <td className="border border-gray-300 p-2">{product.name}</td>
-                                    <td className="border border-gray-300 p-2 text-right">${product.price}</td>
-                                    <td className="border border-gray-300 p-2 text-right truncate max-w-[50px]">{product.description}</td>
-                                    <td className="border border-gray-300 p-2 text-right max-w-[30px]">{product.category}</td>
                                     <td className="border border-gray-300 p-2 flex justify-center items-center">
                                         {product.image ? (
                                             <img
@@ -161,6 +158,10 @@ export default function Dashboard() {
                                             "ไม่มีรูป"
                                         )}
                                     </td>
+                                    <td className="border border-gray-300 p-2">{product.name}</td>
+                                    <td className="border border-gray-300 p-2 text-right">${product.price}</td>
+                                    <td className="border border-gray-300 p-2 text-right truncate max-w-[50px]">{product.description}</td>
+                                    <td className="border border-gray-300 p-2 text-right max-w-[30px]">{product.category}</td>
 
                                     <td className="border border-gray-300 p-2 text-center">
                                         <button
