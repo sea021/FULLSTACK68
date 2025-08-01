@@ -41,8 +41,8 @@ export default function Home() {
                 />
                 <h4 className="mt-4 text-2xl font-black text-black">{product.name}</h4>
                 <p className="text-blue-600 font-bold text-lg">{product.price} บาท </p>
-                <p className="text-gray-700 font-sm">{product.desciption}</p>
-                <p className="inline-block p-3 mt-2 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">{product.cetagory}</p>
+                <p className="text-gray-700 font-sm">{product.description}</p>
+                <p className="inline-block p-3 mt-2 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">{product.category}</p>
               </div>
             ))}
           </div>
