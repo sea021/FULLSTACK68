@@ -116,7 +116,7 @@ export default function Dashboard() {
     return (
         <div>
             <div className="p-4">
-                <div className="flex justify-end p-4">
+                <div className="flex justify-start p-4">
                     <button
                         onClick={() => setShowAddModal(true)}
                         className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
@@ -150,9 +150,13 @@ export default function Dashboard() {
                                     <td className="border border-gray-300 p-2 text-right">${product.price}</td>
                                     <td className="border border-gray-300 p-2 text-right truncate max-w-[50px]">{product.description}</td>
                                     <td className="border border-gray-300 p-2 text-right max-w-[30px]">{product.category}</td>
-                                    <td className="border border-gray-300 p-2">
+                                    <td className="border border-gray-300 p-2 flex justify-center items-center">
                                         {product.image ? (
-                                            <img src={product.image} alt={product.name} className="w-10 h-10 object-cover" />
+                                            <img
+                                                src={product.image}
+                                                alt={product.name}
+                                                className="w-25 h-25 object-cover"
+                                            />
                                         ) : (
                                             "ไม่มีรูป"
                                         )}
