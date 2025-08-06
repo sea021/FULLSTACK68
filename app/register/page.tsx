@@ -38,19 +38,6 @@ const RegisterPage = () => {
     }
   };
 
-      useEffect(() => {
-        async function checkAuth() {
-            try {
-                const res = await axios.get("/api/me");
-                if (res.data.user) {
-                    router.replace("/dashboard");
-                }
-            } catch {
-            }
-        }
-        checkAuth();
-    }, [router]);
-
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
       <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
@@ -115,10 +102,10 @@ const RegisterPage = () => {
           {registerSuccess
             ? "สมัครสมาชิกสำเร็จ"
             : loading
-            ? "กำลังสมัครสมาชิก"
-            : message != ""
-            ? message
-            : "Register"}
+              ? "กำลังสมัครสมาชิก"
+              : message != ""
+                ? message
+                : "Register"}
         </button>
         <p className="mt-4 text-sm text-center text-gray-600">
           Already have an account?{" "}

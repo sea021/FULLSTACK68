@@ -1,9 +1,9 @@
 "use client";
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from "next/navigation"
 
-const LoginPage: React.FC = () => {
+export default function LoginPage() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -20,7 +20,7 @@ const LoginPage: React.FC = () => {
             const res = await axios.post('/api/login', {
                 email,
                 password
-            });
+            })
 
             if (res.status) {
                 console.log(res.data);
@@ -29,30 +29,15 @@ const LoginPage: React.FC = () => {
                     setTimeout(() => setMessage(""), 2000);
                 } else {
                     setLogin(true);
-                    window.location.href = "/dashboard";
+                    router.push("/dashboard");
                 }
-
             }
         } catch (error) {
             console.log(error)
-
         } finally {
             setLoading(false);
         }
     }
-
-    useEffect(() => {
-        async function checkAuth() {
-            try {
-                const res = await axios.get("/api/me");
-                if (res.data.user) {
-                    router.replace("/dashboard");
-                }
-            } catch {
-            }
-        }
-        checkAuth();
-    }, [router]);
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -105,5 +90,3 @@ const LoginPage: React.FC = () => {
         </div>
     );
 };
-
-export default LoginPage;

@@ -1,41 +1,25 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import axios from "axios";
 import { Products } from "../generated/prisma";
 
 
 export default function Dashboard() {
 
-    interface User {
-        username: string;
-    }
-
-
-    const [user, setUser] = useState<User | null>(null);
-    const router = useRouter();
     const [products, setProducts] = useState<Products[]>([])
     const [editingProduct, setEditingProduct] = useState<Products | null>(null);
+    const [newProduct, setNewProduct] = useState({
+        name: "",
+        price: 0,
+        description: "",
+        category: "",
+        image: "",
 
+    });
+    const [showAddModal, setShowAddModal] = useState(false);
 
 
     useEffect(() => {
-        async function fetchUser() {
-            try {
-                const res = await axios.get("/api/me");
-                if (!res.data.user) {
-                    router.push("/login")
-                } else if (res.data.user.role !== "admin") {
-                    router.push("/")
-                } else {
-                    setUser(res.data.user);
-                }
-            } catch (error) {
-                console.error(error);
-                router.push("/login")
-            }
-        }
-
         async function fetchProducts() {
             try {
                 const res = await axios.get("/api/product");
@@ -48,8 +32,7 @@ export default function Dashboard() {
         }
 
         fetchProducts();
-        fetchUser();
-    }, [router]);
+    }, []);
 
 
     async function handleDeleteProduct(id: string) {
@@ -84,16 +67,6 @@ export default function Dashboard() {
         }
     }
 
-    const [newProduct, setNewProduct] = useState({
-        name: "",
-        price: 0,
-        description: "",
-        category: "",
-        image: "",
-
-    });
-    const [showAddModal, setShowAddModal] = useState(false);
-
     async function handleAddProduct() {
         try {
             await axios.post("/api/product", newProduct);
@@ -107,12 +80,6 @@ export default function Dashboard() {
             console.error("Error adding product", error);
         }
     }
-
-
-    if (!user) {
-        return <div>Loading...</div>;
-    }
-
 
     return (
         <div>
