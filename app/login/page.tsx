@@ -29,7 +29,7 @@ export default function LoginPage() {
                     setTimeout(() => setMessage(""), 2000);
                 } else {
                     setLogin(true);
-                    router.push("/dashboard");
+                    window.location.href = "/dashboard";
                 }
             }
         } catch (error) {
