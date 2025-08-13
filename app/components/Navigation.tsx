@@ -1,41 +1,15 @@
-"use client"
+"use client";
 
-import axios from "axios";
 import Link from "next/link";
-import { useEffect, useState, useRef } from "react";
+import { useRef, useState, useEffect } from "react";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Navigation() {
-
-  interface User {
-    username: string;
-    role: string;
-  }
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
+  const { user, isLoggedIn, logout } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    async function fetchUser() {
-      try {
-        const res = await axios.get("/api/me");
-        if (res.data.user) {
-          setUser(res.data.user);
-          setIsLoggedIn(true);
-        } else {
-          setUser(null);
-          setIsLoggedIn(false);
-        }
-      } catch (error) {
-        console.error(error);
-        setIsLoggedIn(false);
-        setUser(null);
-      }
-    }
-
-    fetchUser();
-
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setDropdownOpen(false);
@@ -44,12 +18,6 @@ export default function Navigation() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-
-  const logout = async () => {
-    await axios.post("/api/logout");
-    window.location.href = "/login";
-  }
 
   return (
     <header className="bg-white shadow-md">
@@ -73,7 +41,9 @@ export default function Navigation() {
                 onClick={() => setDropdownOpen(!dropdownOpen)}
                 className="text-gray-700 hover:text-blue-600 px-3 py-1 rounded cursor-pointer flex items-center space-x-1"
               >
-                <span className="bg-blue-500 text-white p-2 rounded-lg">{user.username}</span>
+                <span className="bg-blue-500 text-white p-2 rounded-lg">
+                  {user.username} ({user.role})
+                </span>
               </button>
 
               {dropdownOpen && (
@@ -102,5 +72,5 @@ export default function Navigation() {
         </nav>
       </div>
     </header>
-  )
+  );
 }

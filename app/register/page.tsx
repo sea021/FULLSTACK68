@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const RegisterPage = () => {
   const [username, setUsername] = useState("");
@@ -30,6 +30,7 @@ const RegisterPage = () => {
           }, 5000);
         } else {
           setRegister(true);
+          router.push("/login")
         }
       }
     } catch (error) {
