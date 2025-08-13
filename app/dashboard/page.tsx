@@ -55,7 +55,7 @@ export default function Dashboard() {
         setEditingProduct(null);
     }
 
-    async function handleUpdateProduct(id: string) {
+    async function handleUpdateProduct() {
         if (!editingProduct) return;
         try {
             await axios.put("/api/product", editingProduct);
@@ -66,6 +66,7 @@ export default function Dashboard() {
             console.error("Error updating product", error);
         }
     }
+
 
     async function handleAddProduct() {
         try {
@@ -205,7 +206,7 @@ export default function Dashboard() {
                             </button>
                             <button
                                 className="bg-green-600 text-white px-4 py-2 rounded"
-                                onClick={() => handleUpdateProduct(editingProduct.id)}
+                                onClick={() => handleUpdateProduct()}
                             >
                                 บันทึก
                             </button>
