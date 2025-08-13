@@ -1,7 +1,6 @@
 "use client";
 import axios from 'axios';
 import { useState } from 'react';
-import { useRouter } from "next/navigation"
 
 export default function LoginPage() {
 
@@ -10,7 +9,6 @@ export default function LoginPage() {
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
     const [LoginSuccess, setLogin] = useState(false);
-    const router = useRouter()
 
     const login = async () => {
         try {
