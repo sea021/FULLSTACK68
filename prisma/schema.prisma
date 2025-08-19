@@ -15,12 +15,12 @@ datasource db {
 }
 
 model Products {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
-  price Int
-  image String
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  price       Int
+  image       String
   description String?
-  category String?
+  category    String?
 }
 
 model User {
@@ -33,4 +33,13 @@ model User {
   createdAt DateTime @default(now())
 }
 
-
+model Order {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  stripeSessionId String   @unique
+  productId       String   @db.ObjectId
+  email           String?
+  amount          Int // หน่วยเป็นสตางค์
+  currency        String
+  status          String
+  createdAt       DateTime @default(now())
+}

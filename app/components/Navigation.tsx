@@ -25,7 +25,7 @@ export default function Navigation() {
         <h1 className="text-2xl font-bold text-blue-600">Nextshop</h1>
         <nav className="space-x-4 flex items-center">
           <Link href="/" className="text-gray-600 hover:text-blue-500">Home</Link>
-          <Link href="#" className="text-gray-600 hover:text-blue-500">Shop</Link>
+          <Link href="/shop" className="text-gray-600 hover:text-blue-500">Shop</Link>
           <Link href="#" className="text-gray-600 hover:text-blue-500">Contact</Link>
 
           {!isLoggedIn && (
