@@ -11,6 +11,14 @@ interface UserBody {
     role?: string;
 }
 
+interface UpdateUserData {
+    username?: string;
+    email?: string;
+    role?: string;
+    password?: string;
+}
+
+
 // GET - ดึงรายการผู้ใช้ทั้งหมด
 export async function GET() {
     try {
@@ -148,18 +156,19 @@ export async function PUT(req: NextRequest) {
         }
 
         // เตรียมข้อมูลสำหรับอัปเดต
-        const updateData: any = {};
-        
+        const updateData: UpdateUserData = {};
+
         if (body.username) updateData.username = body.username;
         if (body.email) updateData.email = body.email.toLowerCase();
         if (body.role !== undefined) updateData.role = body.role || "user";
-        
+
         // ถ้ามีการส่ง password ใหม่มา ให้ hash ก่อน
         if (body.password && body.password.trim() !== '') {
             updateData.password = createHash("sha256")
                 .update(body.password)
                 .digest("hex");
         }
+
 
         // อัปเดตผู้ใช้
         const updated = await prisma.user.update({
@@ -175,15 +184,15 @@ export async function PUT(req: NextRequest) {
             }
         });
 
-        return NextResponse.json({ 
-            success: true, 
-            user: updated 
+        return NextResponse.json({
+            success: true,
+            user: updated
         }, { status: 200 });
 
     } catch (error) {
         console.error("Error updating user:", error);
-        return NextResponse.json({ 
-            message: "Error updating user: " + error 
+        return NextResponse.json({
+            message: "Error updating user: " + error
         }, { status: 500 });
     }
 }
@@ -210,18 +219,18 @@ export async function DELETE(req: NextRequest) {
             }, { status: 404 });
         }
 
-        await prisma.user.delete({ 
-            where: { id: body.id } 
+        await prisma.user.delete({
+            where: { id: body.id }
         });
 
-        return NextResponse.json({ 
-            message: "User deleted successfully" 
+        return NextResponse.json({
+            message: "User deleted successfully"
         }, { status: 200 });
 
     } catch (error) {
         console.error("Error deleting user:", error);
-        return NextResponse.json({ 
-            message: "Error deleting user: " + error 
+        return NextResponse.json({
+            message: "Error deleting user: " + error
         }, { status: 500 });
     }
 }
