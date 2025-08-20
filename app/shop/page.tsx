@@ -3,7 +3,7 @@ import axios from "axios";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { Products } from "../generated/prisma";
-
+import getStripe from "@/lib/getStripe";
 import { useAuth } from "@/context/AuthContext"; // ✅ เพิ่ม
 
 export default function Shop() {
@@ -22,18 +22,27 @@ export default function Shop() {
   async function handleBuy(productId: string) {
     try {
       const res = await axios.post("/api/checkout", { productId, quantity: 1 });
-      if (res.data.qrCodeUrl) {
-        const qrWindow = window.open("", "_blank");
-        qrWindow?.document.write(`<img src="${res.data.qrCodeUrl}" alt="QR Code" />`);
+
+      const stripe = await getStripe();
+
+      if (res.data.id && stripe) {
+        const { error } = await stripe.redirectToCheckout({ sessionId: res.data.id });
+        if (error) alert(error.message);
+      } else if (res.data.url) {
+        window.location.href = res.data.url;
       } else {
-        alert("Cannot generate QR code");
+        alert("Cannot redirect to checkout");
       }
     } catch (err: unknown) {
-      console.log(err)
-      alert("Failed to start checkout");
+      if (axios.isAxiosError(err)) {
+        alert(err.response?.data?.error ?? "Failed to start checkout");
+      } else if (err instanceof Error) {
+        alert(err.message);
+      } else {
+        alert("Failed to start checkout");
+      }
     }
   }
-
 
   return (
     <>
