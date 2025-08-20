@@ -24,7 +24,6 @@ export async function POST(req: Request) {
         const headersList = await headers();
         const origin = headersList.get("origin") ?? process.env.NEXT_PUBLIC_BASE_URL;
 
-        // แปลง relative path เป็น full URL
         const imageUrl = product.image
             ? product.image.startsWith("http")
                 ? product.image
