@@ -6,10 +6,13 @@ import axios from "axios";
 interface User {
   username: string;
   role: string;
+  email : string;
 }
 
 interface AuthContextType {
   user: User | null;
+  email: string | null;
+
   isLoggedIn: boolean;
   logout: () => Promise<void>;
 }
@@ -17,6 +20,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType>({
   user: null,
   isLoggedIn: false,
+  email: null,
   logout: async () => { },
 });
 
@@ -46,7 +50,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, isLoggedIn, logout }}>
+    <AuthContext.Provider value={{ user, isLoggedIn, logout , email: user?.username || null }}>
       {children}
     </AuthContext.Provider>
   );
