@@ -11,7 +11,7 @@ export default function Footer() {
                   <path fillRule="evenodd" d="M10 2L3 7v11h4v-6h6v6h4V7l-7-5z" clipRule="evenodd" />
                 </svg>
               </div>
-              <span className="text-xl font-semibold text-gray-900">ShopEase</span>
+              <span className="text-xl font-semibold text-gray-900">IPHONE</span>
             </div>
             <p className="text-gray-600 text-sm max-w-md">
               Your trusted e-commerce platform for seamless online shopping experiences.
@@ -43,7 +43,7 @@ export default function Footer() {
 
         <div className="border-t border-gray-200 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-gray-600">
-            © {new Date().getFullYear()} ShopEase. All rights reserved.
+            © {new Date().getFullYear()} IPHONE. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-gray-400 hover:text-gray-600 transition-colors">

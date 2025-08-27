@@ -39,7 +39,7 @@ export default function Navigation() {
                 <path fillRule="evenodd" d="M10 2L3 7v11h4v-6h6v6h4V7l-7-5z" clipRule="evenodd" />
               </svg>
             </div>
-            <span className="text-xl font-semibold text-gray-900">ShopEase</span>
+            <span className="text-xl font-semibold text-gray-900">IPHONE</span>
           </Link>
 
           {/* Desktop Navigation Links */}

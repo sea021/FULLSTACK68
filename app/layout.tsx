@@ -18,7 +18,7 @@ const prompt = Prompt({
 });
 
 export const metadata: Metadata = {
-  title: "ShopEase",
+  title: "IPHONE",
   description: "Jirapat Papai",
 };
 

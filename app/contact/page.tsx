@@ -55,7 +55,7 @@ export default function Contact() {
     return (
         <>
             <Head>
-                <title>ShopEase - Contact Us</title>
+                <title>IPHONE - Contact Us</title>
             </Head>
             <main className="bg-gray-50 min-h-screen">
                 {/* Hero Section */}
@@ -117,7 +117,7 @@ export default function Contact() {
                                         </div>
                                         <div>
                                             <h3 className="text-lg font-semibold text-gray-900">Email</h3>
-                                            <p className="text-gray-600 mt-1">contact@shopease.com</p>
+                                            <p className="text-gray-600 mt-1">contact@IPHONE.com</p>
                                         </div>
                                     </div>
 

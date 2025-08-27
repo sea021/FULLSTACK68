@@ -40,7 +40,7 @@ export default function LoginPage() {
     return (
         <>
             <Head>
-                <title>ShopEase - Login</title>
+                <title>IPHONE - Login</title>
             </Head>
             <main className="bg-gray-50 min-h-screen">
                 <div className="flex items-center justify-center min-h-screen px-4">
