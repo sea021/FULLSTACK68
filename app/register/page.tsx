@@ -46,7 +46,7 @@ const RegisterPage = () => {
     return (
         <>
             <Head>
-                <title>ShopEase - Register</title>
+                <title>IPHONE - Register</title>
             </Head>
             <main className="bg-gray-50 min-h-screen">
                 <div className="flex items-center justify-center min-h-screen px-4">

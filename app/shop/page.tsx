@@ -169,7 +169,7 @@ export default function Shop() {
   return (
     <>
       <Head>
-        <title>ShopEase - Shop</title>
+        <title>IPHONE - Shop</title>
       </Head>
       <main className="bg-gray-50 min-h-screen">
         {/* Hero Section */}
